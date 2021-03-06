@@ -1,17 +1,21 @@
 import React from "react";
-import { Provider } from "react-redux";
-import generateStore from './redux/store'
-import Articles from "./components/Articles";
+import Products from "./components/Products.jsx";
+import Login from "./components/Login.jsx";
+import Navbar from "./components/Navbar.jsx";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
-
-  const store = generateStore()
   return (
-    
-    <Provider store={store}>
-      <Articles />
-    </Provider>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route component={Products} path="/" exact  />
+          <Route component={Login} path="/login" exact  />
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
