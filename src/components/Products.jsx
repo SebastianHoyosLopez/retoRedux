@@ -47,7 +47,7 @@ const Products = () => {
       </div>
       <div className="row">
         {products.map((products) => (
-          <div key={products.id} className="col-md-3 mt-5">
+          <div key={products.id} className="col-md-6 col-lg-3 my-5" style={{height:"350px"}}>
             <div className="card">
               <img
                 src={products.image}
@@ -56,7 +56,7 @@ const Products = () => {
               />
               <div className="card-body">
                 <h5 className="card-title">{products.name}</h5>
-                <p>{products.price}</p>
+                <p>Price: {products.price}</p>
                 <button className="btn btn-dark">Add to cart</button>
               </div>
             </div>

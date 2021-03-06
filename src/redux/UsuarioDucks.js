@@ -39,7 +39,6 @@ export const loginUserAction = () => async (dispatch) => {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     const res = await auth.signInWithPopup(provider);
-    console.log(res);
     dispatch({
       type: USUARIO_EXITO,
       payload: {
