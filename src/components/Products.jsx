@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import { addToCart } from '../redux/ShoppingCartDucks'
+import {useDispatch} from 'react-redux'
+
 const Products = () => {
+
+  const dispatch = useDispatch()
+
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMoreCount, setHasMoreCount] = useState();
@@ -15,15 +21,16 @@ const Products = () => {
       setProducts(products);
       const hasMorePages = response.data.paginatorInfo.hasMorePages;
       setHasMoreCount(hasMorePages);
-      console.log(response.data.paginatorInfo);
     }
     fetchData();
   }, [currentPage]);
 
+
+
   return (
     <div className="container text-center mt-4">
       <h1>Product List</h1>
-      <div className="d-flex justify-content-around mt-5">
+      <div className="d-flex justify-content-center mt-5">
         {currentPage > 1 && (
           <button
             onClick={() => {
@@ -57,7 +64,7 @@ const Products = () => {
               <div className="card-body">
                 <h5 className="card-title">{products.name}</h5>
                 <p>Price: {products.price}</p>
-                <button className="btn btn-dark">Add to cart</button>
+                <button onClick={() => dispatch(addToCart(products))} className="btn btn-dark">Add to cart</button>
               </div>
             </div>
           </div>

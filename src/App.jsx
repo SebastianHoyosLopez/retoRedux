@@ -10,6 +10,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { auth } from "./firebase.js";
+import ShoppingCart from "./components/ShoppingCart.jsx";
 
 const App = () => {
   const [firebaseUser, setFireBaseUser] = React.useState(false);
@@ -47,6 +48,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <ProtectedRoute component={Products} path="/" exact />
+          <ProtectedRoute component={ShoppingCart} path="/cartShopping" exact />
           <Route component={Login} path="/login" exact />
         </Switch>
       </div>

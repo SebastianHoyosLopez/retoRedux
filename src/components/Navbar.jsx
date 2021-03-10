@@ -28,7 +28,10 @@ const Navbar = (props) => {
         </Link>
       )}
       {activo ? (
-        <div className="d-flex">
+        <div className="">
+          <NavLink to="/cartShopping">
+            <img src="https://imgur.com/w4yBTk5.jpg" style={{height: "60px"}} alt="cart"/>
+          </NavLink>
           <NavLink className="btn btn-dark mr-2" to="/" exact>
             Inicio
           </NavLink>

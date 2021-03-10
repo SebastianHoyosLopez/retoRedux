@@ -1,10 +1,12 @@
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
+import shoppingReducer from './ShoppingCartDucks'
 import usuarioReducer, {activeUserAction} from './UsuarioDucks'
 
 const rootReducer = combineReducers({
-    usuario: usuarioReducer
+    cart: shoppingReducer,
+    usuario: usuarioReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
