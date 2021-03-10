@@ -1,50 +1,23 @@
-import { Products } from "../components/Products";
+import {Products} from '../components/Products'
 //const
 const initialData = {
   loading: false,
-  array: [],
-  offset: 0
 };
 //type
-const LOADING = "LOADING";
-const ADD_TO_CART = "ADD_TO_CART";
-const LOADING_ERROR = "LOADING_ERROR";
 
 //reducer
 export default function shoppingReducer(state = initialData, action) {
-  switch (action.type) {
-    case LOADING:
-      return { ...state, loading: true };
-    case ADD_TO_CART:
-      return { ...state, loading: false, array: action.payload };
-    case LOADING_ERROR:
-      return { initialData };
-    default:
-      return { ...state };
-  }
+    switch(action.type) {
+        case LOADING:
+            return{...state, loading: true}
+    }
 }
 
 //action
-export const addToCart = (products) => (dispatch, getState) => {
-  dispatch({
-    type: LOADING,
-  });
- 
-  try {
+export const addToCart = (Products) => async (dispatch) => {
     dispatch({
-      type: ADD_TO_CART,
-      payload: {
-        product: {
-          name: products.name,
-          id: products.id,
-          price: products.price,
-          image: products.image,
-        },
-      },
-    });
-  } catch (error) {
-    dispatch({
-      type: LOADING_ERROR,
-    });
-  }
-};
+        type: LOADING,
+                
+    })
+    console.log(Products)
+}
