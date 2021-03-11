@@ -18,7 +18,6 @@ const App = () => {
   React.useEffect(() => {
     const fetchUser = () => {
       auth.onAuthStateChanged((user) => {
-        console.log(user);
         if (user) {
           setFireBaseUser(user);
         } else {
@@ -54,7 +53,11 @@ const App = () => {
       </div>
     </Router>
   ) : (
-    <div>Cargando...</div>
+    <div className="text-center">
+      <div className="spinner-border" role="status">
+        <span className="sr-only"></span>
+      </div>
+    </div>
   );
 };
 

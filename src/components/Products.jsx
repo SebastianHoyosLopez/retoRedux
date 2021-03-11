@@ -53,15 +53,15 @@ const Products = () => {
         )}
       </div>
       <div className="row">
-        {products.map((products) => (
-          <div key={products.id} className="col-md-6 col-lg-3 my-5" style={{height:"350px"}}>
+        {products.map((products, index) => (
+          <div key={index} className="col-md-6 col-lg-3 my-5" style={{height:"350px"}}>
             <div className="card">
               <img
                 src={products.image}
                 className="card-img-top"
                 alt={products.name}
               />
-              <div className="card-body">
+              <div className="card-body ">
                 <h5 className="card-title">{products.name}</h5>
                 <p>Price: {products.price}</p>
                 <button onClick={() => dispatch(addToCart(products))} className="btn btn-dark">Add to cart</button>
