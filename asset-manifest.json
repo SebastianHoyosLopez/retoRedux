@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/retoRedux/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/retoRedux/static/js/main.20dd6b80.chunk.js",
-    "main.js.map": "/retoRedux/static/js/main.20dd6b80.chunk.js.map",
+    "main.css": "/retoRedux/static/css/main.2ae47eeb.chunk.css",
+    "main.js": "/retoRedux/static/js/main.a56c2d73.chunk.js",
+    "main.js.map": "/retoRedux/static/js/main.a56c2d73.chunk.js.map",
     "runtime-main.js": "/retoRedux/static/js/runtime-main.77a8fb59.js",
     "runtime-main.js.map": "/retoRedux/static/js/runtime-main.77a8fb59.js.map",
-    "static/js/2.ec0e08bd.chunk.js": "/retoRedux/static/js/2.ec0e08bd.chunk.js",
-    "static/js/2.ec0e08bd.chunk.js.map": "/retoRedux/static/js/2.ec0e08bd.chunk.js.map",
+    "static/js/2.6d0eb694.chunk.js": "/retoRedux/static/js/2.6d0eb694.chunk.js",
+    "static/js/2.6d0eb694.chunk.js.map": "/retoRedux/static/js/2.6d0eb694.chunk.js.map",
     "index.html": "/retoRedux/index.html",
-    "static/css/main.6dea0f05.chunk.css.map": "/retoRedux/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.ec0e08bd.chunk.js.LICENSE.txt": "/retoRedux/static/js/2.ec0e08bd.chunk.js.LICENSE.txt"
+    "static/css/main.2ae47eeb.chunk.css.map": "/retoRedux/static/css/main.2ae47eeb.chunk.css.map",
+    "static/js/2.6d0eb694.chunk.js.LICENSE.txt": "/retoRedux/static/js/2.6d0eb694.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.77a8fb59.js",
-    "static/js/2.ec0e08bd.chunk.js",
-    "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.20dd6b80.chunk.js"
+    "static/js/2.6d0eb694.chunk.js",
+    "static/css/main.2ae47eeb.chunk.css",
+    "static/js/main.a56c2d73.chunk.js"
   ]
 }
