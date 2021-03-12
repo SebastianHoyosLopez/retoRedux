@@ -1,32 +1,22 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
-import { useDispatch ,useSelector } from "react-redux";
-import {productActiveCart} from '../redux/ShoppingCartDucks'
-
+import { useDispatch, useSelector } from "react-redux";
 
 const ShoppingCart = () => {
   const productsCart = useSelector((store) => store.cart.array);
   const activo = useSelector((store) => store.cart.activoProduct);
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const fetchData = () => {
-        dispatch(productActiveCart())
-    }
-    fetchData()
-  },[dispatch])
-
   return (
-    <div className="row">
+    <div className="container">
       <h1 className="text-center mt-2 text-uppercase">
         Lista de productos en el carrito
       </h1>
-      {activo
-        ? productsCart.map((products) => (
+      <div className="row">
+        {activo ? (
+          productsCart.map((products, index) => (
             <div
-              key={products.id}
-              className="col-md-6 col-lg-3 mx-5 my-5 text-center"
+              key={index}
+              className="col-md-3 col-lg-3 mx-2 my-5 text-center"
               style={{ height: "350px" }}
             >
               <div className="card">
@@ -39,7 +29,12 @@ const ShoppingCart = () => {
               </div>
             </div>
           ))
-        : (<h3 className="text-center mt-5">No tienes ningun producto en el carrito</h3>)}
+        ) : (
+          <h3 className="text-center mt-5">
+            No tienes ningun producto en el carrito
+          </h3>
+        )}
+      </div>
     </div>
   );
 };

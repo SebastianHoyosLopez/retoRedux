@@ -14,14 +14,13 @@ const LOADING_ERROR = "LOADING_ERROR";
 export default function shoppingReducer(state = initialData, action) {
   switch (action.type) {
     case LOADING_PRODUCT:
-      return { ...state, loading_Product: true };
+      return Object.assign({}, state, { loading_Product: true });
     case ADD_TO_CART:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         activoProduct: true,
         loading_Product: false,
-        array: [action.payload],
-      };
+        array: [...state.array, action.payload],
+      });
     case LOADING_ERROR:
       return { initialData };
     default:
@@ -38,7 +37,7 @@ export const productActiveCart = () => (dispatch) => {
   if (localStorage.getItem("product")) {
     console.log("datos guardados");
     dispatch({
-      type: ADD_TO_CART,
+      type: LOADING_PRODUCT,
       payload: JSON.parse([localStorage.getItem("product")]),
     });
     return;
@@ -49,24 +48,16 @@ export const addToCart = (products) => (dispatch, getState) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
-  if (localStorage.getItem("product")) {
-    console.log("datos guardados");
-    dispatch({
-      type: ADD_TO_CART,
-      payload: JSON.parse(localStorage.getItem("product")),
-    });
-    return;
-  }
-  const product = {
-    name: products.name,
-    id: products.id,
-    price: products.price,
-    image: products.image,
-  };
+  console.log(getState().cart.array);
   try {
     dispatch({
       type: ADD_TO_CART,
-      payload: product,
+      payload: {
+        name: products.name,
+        id: products.id,
+        price: products.price,
+        image: products.image,
+      },
     });
     localStorage.setItem(
       "product",
