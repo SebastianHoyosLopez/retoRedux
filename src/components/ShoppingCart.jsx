@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ShoppingCart = () => {
   const productsCart = useSelector((store) => store.cart.array);
@@ -10,7 +10,9 @@ const ShoppingCart = () => {
     <div className="container">
       <h1 className="text-center mt-2 text-uppercase">
         Lista de productos en el carrito
-      </h1>
+      </h1>{ activo ? ( 
+      <h3 className="text-uppercase text-primary mt-5">Cantidad de productos en el carrito: {productsCart.length}</h3>
+       ): null }
       <div className="row">
         {activo ? (
           productsCart.map((products, index) => (

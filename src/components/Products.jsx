@@ -36,7 +36,7 @@ const Products = () => {
             onClick={() => {
               setCurrentPage(currentPage - 1);
             }}
-            className="btn btn-dark btn-sm"
+            className="btn btn-warning btn-sm"
           >
             Anterior
           </button>
@@ -46,7 +46,7 @@ const Products = () => {
             onClick={() => {
               setCurrentPage(currentPage + 1);
             }}
-            className="btn btn-dark btn-sm mx-3"
+            className="btn btn-warning btn-sm mx-3"
           >
             Sigiente
           </button>
@@ -64,7 +64,7 @@ const Products = () => {
               <div className="card-body ">
                 <h5 className="card-title">{products.name}</h5>
                 <p>Price: {products.price}</p>
-                <button onClick={() => dispatch(addToCart(products))} className="btn btn-dark">Add to cart</button>
+                <button onClick={() => dispatch(addToCart(products))} className="btn btn-danger">Add to cart</button>
               </div>
             </div>
           </div>

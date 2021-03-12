@@ -48,7 +48,6 @@ export const addToCart = (products) => (dispatch, getState) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
-  console.log(getState().cart.array);
   try {
     dispatch({
       type: ADD_TO_CART,
