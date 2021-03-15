@@ -1,8 +1,10 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct } from "../redux/ShoppingCartDucks";
 
 const ShoppingCart = () => {
+  const dispatch = useDispatch();
   const productsCart = useSelector((store) => store.cart.array);
   const activo = useSelector((store) => store.cart.activoProduct);
 
@@ -10,24 +12,31 @@ const ShoppingCart = () => {
     <div className="container">
       <h1 className="text-center mt-2 text-uppercase">
         Lista de productos en el carrito
-      </h1>{ activo ? ( 
-      <h3 className="text-uppercase text-primary mt-5">Cantidad de productos en el carrito: {productsCart.length}</h3>
-       ): null }
+      </h1>
+      {activo ? (
+        <h3 className="text-uppercase text-primary mt-5">
+          Cantidad de productos en el carrito: {productsCart.length}
+        </h3>
+      ) : null}
       <div className="row">
         {activo ? (
-          productsCart.map((products, index) => (
+          productsCart.map((products) => (
             <div
-              key={index}
-              className="col-md-3 col-lg-3 mx-2 my-5 text-center"
-              style={{ height: "350px" }}
+              key={products.id}
+              className="col-md-3 col-lg-3 my-3 text-center"
             >
-              <div className="card">
+              <div className="card" style={{ height: "320px" }}>
                 <img src={products.image} className="card-img-top" alt="" />
                 <div className="card-body">
                   <h5 className="card-title">{products.name}</h5>
                   <p>Price: {products.price}</p>
                 </div>
-                <button className="btn btn-dark btn-sm">Eliminar</button>
+                <button
+                  className="btn btn-dark btn-sm mx-3 mb-4"
+                  onClick={() => dispatch(deleteProduct(products))}
+                >
+                  Eliminar
+                </button>
               </div>
             </div>
           ))

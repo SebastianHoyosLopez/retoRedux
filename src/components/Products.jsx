@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { addToCart } from '../redux/ShoppingCartDucks'
-import {useDispatch} from 'react-redux'
+import { addToCart } from "../redux/ShoppingCartDucks";
+import { useDispatch, useSelector } from "react-redux";
 
 const Products = () => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMoreCount, setHasMoreCount] = useState();
 
+  const selection = useSelector((state) => state.cart.selection);
+  console.log(selection)
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -24,7 +25,6 @@ const Products = () => {
     }
     fetchData();
   }, [currentPage]);
-
 
 
   return (
@@ -53,9 +53,13 @@ const Products = () => {
         )}
       </div>
       <div className="row">
-        {products.map((products, index) => (
-          <div key={index} className="col-md-6 col-lg-3 my-5" style={{height:"350px"}}>
-            <div className="card">
+        {products.map((products) => (
+          <div
+            key={products.id}
+            className="col-md-6 col-lg-3 my-5"
+            style={{ height: "350px" }}
+          >
+            <div className="card" style={{ height: "400px" }}>
               <img
                 src={products.image}
                 className="card-img-top"
@@ -64,7 +68,13 @@ const Products = () => {
               <div className="card-body ">
                 <h5 className="card-title">{products.name}</h5>
                 <p>Price: {products.price}</p>
-                <button onClick={() => dispatch(addToCart(products))} className="btn btn-danger">Add to cart</button>
+                <button
+                  onClick={() => dispatch(addToCart(products))}
+                  className="btn btn-danger"
+                  disabled={selection}
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import './style/Navbar.css'
+import "./style/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -14,10 +14,8 @@ const Navbar = (props) => {
     props.history.push("/login");
   };
 
-  const count = useSelector((store) => store.cart.array.length)
-  const activoProduct = useSelector((store) => store.cart.activoProduct);
-
-
+  const count = useSelector((store) => store.cart.array.length);
+  
   const activo = useSelector((store) => store.usuario.activo);
   const user = useSelector((store) => store.usuario.user);
 
@@ -35,8 +33,15 @@ const Navbar = (props) => {
       {activo ? (
         <div>
           <NavLink to="/cartShopping">
-            <p id="count" className="mt-3 text-danger">{ activoProduct ? count : null}</p>
-            <img id="imgCart" src="https://imgur.com/w4yBTk5.jpg" style={{height: "60px"}} alt="cart"/>
+            <p id="count" className="mt-3 text-danger">
+              {count >= 1 ? count : null}
+            </p>
+            <img
+              id="imgCart"
+              src="https://imgur.com/w4yBTk5.jpg"
+              style={{ height: "60px" }}
+              alt="cart"
+            />
           </NavLink>
           <NavLink className="btn btn-dark mr-2" to="/" exact>
             Inicio

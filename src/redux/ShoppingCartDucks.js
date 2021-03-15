@@ -1,5 +1,6 @@
 //const
 const initialData = {
+  selection: false,
   loading_Product: false,
   activoProduct: false,
   array: [],
@@ -9,6 +10,7 @@ const initialData = {
 const LOADING_PRODUCT = "LOADING_PRODUCT";
 const ADD_TO_CART = "ADD_TO_CART";
 const LOADING_ERROR = "LOADING_ERROR";
+const PRODUCT_DELETE = "PRODUCT_DELETE";
 
 //reducer
 export default function shoppingReducer(state = initialData, action) {
@@ -21,8 +23,11 @@ export default function shoppingReducer(state = initialData, action) {
         loading_Product: false,
         array: [...state.array, action.payload],
       });
+    case PRODUCT_DELETE:
+      return Object.assign({}, state, { array: action.payload });
     case LOADING_ERROR:
       return { initialData };
+
     default:
       return { ...state };
   }
@@ -30,21 +35,20 @@ export default function shoppingReducer(state = initialData, action) {
 
 //action
 
-export const productActiveCart = () => (dispatch) => {
+export const deleteProduct = (products) => (dispatch, getState) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
-  if (localStorage.getItem("product")) {
-    console.log("datos guardados");
-    dispatch({
-      type: LOADING_PRODUCT,
-      payload: JSON.parse([localStorage.getItem("product")]),
-    });
-    return;
-  }
+  const array = getState().cart.array;
+  const arrayFiltrado = array.filter((item) => item.id !== products.id);
+  
+  dispatch({
+    type: PRODUCT_DELETE,
+    payload: arrayFiltrado,
+  });
 };
 
-export const addToCart = (products) => (dispatch, getState) => {
+export const addToCart = (products) => (dispatch) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
@@ -59,7 +63,7 @@ export const addToCart = (products) => (dispatch, getState) => {
       },
     });
     localStorage.setItem(
-      "product",
+      "state",
       JSON.stringify({
         name: products.name,
         id: products.id,
