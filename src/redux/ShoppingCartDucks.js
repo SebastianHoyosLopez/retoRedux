@@ -27,7 +27,6 @@ export default function shoppingReducer(state = initialData, action) {
       return Object.assign({}, state, { array: action.payload });
     case LOADING_ERROR:
       return { initialData };
-
     default:
       return { ...state };
   }
@@ -41,7 +40,7 @@ export const deleteProduct = (products) => (dispatch, getState) => {
   });
   const array = getState().cart.array;
   const arrayFiltrado = array.filter((item) => item.id !== products.id);
-  
+
   dispatch({
     type: PRODUCT_DELETE,
     payload: arrayFiltrado,
@@ -52,6 +51,14 @@ export const addToCart = (products) => (dispatch) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
+  if (localStorage.getItem(products.id)) {
+    console.log("datos guardados");
+    dispatch({
+      type: ADD_TO_CART,
+      payload: JSON.parse(localStorage.getItem(products.id))
+    });
+    return
+  }
   try {
     dispatch({
       type: ADD_TO_CART,
@@ -63,7 +70,7 @@ export const addToCart = (products) => (dispatch) => {
       },
     });
     localStorage.setItem(
-      "state",
+      products.id,
       JSON.stringify({
         name: products.name,
         id: products.id,

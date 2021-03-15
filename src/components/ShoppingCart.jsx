@@ -1,10 +1,8 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct } from "../redux/ShoppingCartDucks";
+import { useSelector } from "react-redux";
 
 const ShoppingCart = () => {
-  const dispatch = useDispatch();
   const productsCart = useSelector((store) => store.cart.array);
   const activo = useSelector((store) => store.cart.activoProduct);
 
@@ -21,20 +19,14 @@ const ShoppingCart = () => {
       <div className="row">
         {activo ? (
           productsCart.map((products) => (
-            <div
-              key={products.id}
-              className="col-md-3 col-lg-3 my-3 text-center"
-            >
+            <div key={products.id} className="col-md-3 col-lg-3 my-3 text-center">
               <div className="card" style={{ height: "320px" }}>
                 <img src={products.image} className="card-img-top" alt="" />
                 <div className="card-body">
                   <h5 className="card-title">{products.name}</h5>
                   <p>Price: {products.price}</p>
                 </div>
-                <button
-                  className="btn btn-dark btn-sm mx-3 mb-4"
-                  onClick={() => dispatch(deleteProduct(products))}
-                >
+                <button className="btn btn-dark btn-sm mx-3 mb-4">
                   Eliminar
                 </button>
               </div>
