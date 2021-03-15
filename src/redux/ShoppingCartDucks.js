@@ -1,3 +1,5 @@
+import {db} from '../firebase'
+import shortid from 'shortid'
 //const
 const initialData = {
   selection: false,
@@ -51,36 +53,25 @@ export const addToCart = (products) => (dispatch) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
-  if (localStorage.getItem(products.id)) {
-    console.log("datos guardados");
-    dispatch({
-      type: ADD_TO_CART,
-      payload: JSON.parse(localStorage.getItem(products.id))
-    });
-    return
-  }
   try {
+    const product = {
+      name: products.name,
+      price: products.price,
+      image: products.image,
+      id: shortid.generate()
+    }
+    const productItem = db.collection('products').add(product)
+    console.log(productItem)
     dispatch({
       type: ADD_TO_CART,
-      payload: {
-        name: products.name,
-        id: products.id,
-        price: products.price,
-        image: products.image,
-      },
-    });
-    localStorage.setItem(
-      products.id,
-      JSON.stringify({
-        name: products.name,
-        id: products.id,
-        price: products.price,
-        image: products.image,
-      })
-    );
+      payload: product
+    })
+    localStorage.setItem(product.id, JSON.stringify(product))
+
   } catch (error) {
     dispatch({
       type: LOADING_ERROR,
     });
+    console.log(error)
   }
 };

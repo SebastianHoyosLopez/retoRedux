@@ -56,7 +56,7 @@ export const loginUserAction = () => async (dispatch) => {
         type: USUARIO_EXITO,
         payload: userDB.data(),
       });
-      localStorage.setItem("user", JSON.stringify(userDB.data()));
+      localStorage.setItem("user", JSON.stringify(userDB.data() ));
     } else {
       //no existe el usuario firestore
       await db.collection("user").doc(user.email).set(user);

@@ -12,7 +12,7 @@ const Products = () => {
   const [hasMoreCount, setHasMoreCount] = useState();
 
   const selection = useSelector((state) => state.cart.selection);
-  console.log(selection)
+  
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
