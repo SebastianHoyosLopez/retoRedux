@@ -23,7 +23,7 @@ const Navbar = (props) => {
     <div className="navbar navbar-dark bg-dark sticky-top">
       {activo ? (
         <Link className="navbar-brand mx-4" to="/">
-          {user.nombre}
+          {user.name}
         </Link>
       ) : (
         <Link className="navbar-brand mx-4" to="/">
