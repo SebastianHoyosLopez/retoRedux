@@ -5,10 +5,14 @@ const Profile = () => {
   const user = useSelector((store) => store.usuario.user);
   console.log(user);
   return (
-    <div className='container'>
+    <div className="container">
       <div className="card text-center mt-5">
         <div className="card-header">
-          <img src={user.photoURL} alt="photo Profile" />
+          <img
+            src={user.photoURL}
+            style={{ borderRadius: "50%" }}
+            alt="photo Profile"
+          />
         </div>
         <div className="card-body">
           <h5 className="card-title">{user.name}</h5>
