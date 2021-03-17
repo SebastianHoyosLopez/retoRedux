@@ -2,6 +2,7 @@ import React from "react";
 import Products from "./components/Products.jsx";
 import Login from "./components/Login.jsx";
 import Navbar from "./components/Navbar.jsx";
+import Profile from "./components/Profile.jsx";
 
 import {
   BrowserRouter as Router,
@@ -48,6 +49,7 @@ const App = () => {
         <Switch>
           <ProtectedRoute component={Products} path="/" exact />
           <ProtectedRoute component={ShoppingCart} path="/cartShopping" exact />
+          <ProtectedRoute component={Profile} path="/Profile" exact />
           <Route component={Login} path="/login" exact />
         </Switch>
       </div>

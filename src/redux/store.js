@@ -1,7 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-import shoppingReducer, { activeProduct } from "./ShoppingCartDucks";
+import shoppingReducer from "./ShoppingCartDucks";
 import usuarioReducer, { activeUserAction } from "./UsuarioDucks";
 
 const rootReducer = combineReducers({

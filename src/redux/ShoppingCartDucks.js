@@ -74,10 +74,6 @@ export const addToCart = (products) => async (dispatch, getState) => {
       });
       return;
     }
-
-    const user = getState().usuario.user;
-    const productItem = await db.collection(user.email).add(product);
-    console.log(productItem.id);
     dispatch({
       type: ADD_TO_CART,
       payload: product,

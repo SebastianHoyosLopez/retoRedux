@@ -62,7 +62,7 @@ export const loginUserAction = () => async (dispatch) => {
       await db.collection("user").doc(user.email).set(user);
       dispatch({
         type: USUARIO_EXITO,
-        payload: user,
+        payload: user, 
       });
       localStorage.setItem("user", JSON.stringify(user));
     }

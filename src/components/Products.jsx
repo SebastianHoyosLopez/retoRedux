@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { addToCart } from "../redux/ShoppingCartDucks";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Products = () => {
   const dispatch = useDispatch();
