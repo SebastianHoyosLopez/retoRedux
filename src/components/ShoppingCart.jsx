@@ -23,16 +23,16 @@ const ShoppingCart = () => {
           productsCart.map((products) => (
             <div
               key={products.id}
-              className="col-md-3 col-lg-3 my-3 text-center"
+              className="col-md-3 my-3 text-center"
             >
-              <div className="card" style={{ height: "320px" }}>
+              <div className="card" style={{ height: "320px", marginBottom:"80px" }}>
                 <img src={products.image} className="card-img-top" alt="" />
                 <div className="card-body">
                   <h5 className="card-title">{products.name}</h5>
                   <p>Price: {products.price}</p>
                 </div>
                 <button
-                  className="btn btn-dark btn-sm mx-3 mb-4"
+                  className="btn btn-dark btn-sm mx-3 mb-5"
                   onClick={() => dispatch(deleteProduct(products))}
                 >
                   Eliminar

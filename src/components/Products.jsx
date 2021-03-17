@@ -10,9 +10,14 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMoreCount, setHasMoreCount] = useState();
+  const [nameProduct, setNameProduct] = useState("");
 
-  const selection = useSelector((state) => state.cart.selection);
-  
+  const searchProduct = (nameProduct) => {
+    return function (product) {
+      return product.name.includes(nameProduct) || !nameProduct;
+    };
+  };
+
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -25,7 +30,6 @@ const Products = () => {
     }
     fetchData();
   }, [currentPage]);
-
 
   return (
     <div className="container text-center mt-4">
@@ -52,8 +56,24 @@ const Products = () => {
           </button>
         )}
       </div>
+      {products && (
+        <div className="input-group d-flex justify-content-end">
+          <div className="form-outline">
+            <input
+              type="search"
+              onChange={(e) => setNameProduct(e.target.value)}
+              id="form1"
+              className="form-control"
+              placeholder="Buscar"
+            />
+          </div>
+          <button type="button" className="btn btn-success">
+            <i className="fas fa-search">Buscar</i>
+          </button>
+        </div>
+      )}
       <div className="row">
-        {products.map((products) => (
+        {products.filter(searchProduct(nameProduct)).map((products) => (
           <div
             key={products.id}
             className="col-md-6 col-lg-3 my-5"
@@ -71,7 +91,6 @@ const Products = () => {
                 <button
                   onClick={() => dispatch(addToCart(products))}
                   className="btn btn-danger"
-                  disabled={selection}
                 >
                   Add to cart
                 </button>

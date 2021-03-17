@@ -1,5 +1,8 @@
 #count {
     position: absolute;
+    z-index: 2;
+    margin-left: 10px;
+    color: red;
 }
 
 #imgCart {

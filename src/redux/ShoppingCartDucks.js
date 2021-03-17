@@ -1,8 +1,7 @@
-import {db} from '../firebase'
-import shortid from 'shortid'
+import { db } from "../firebase";
+import shortid from "shortid";
 //const
 const initialData = {
-  selection: false,
   loading_Product: false,
   activoProduct: false,
   array: [],
@@ -36,20 +35,27 @@ export default function shoppingReducer(state = initialData, action) {
 
 //action
 
-export const deleteProduct = (products) => (dispatch, getState) => {
+export const deleteProduct = (products) => async (dispatch, getState) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
-  const array = getState().cart.array;
-  const arrayFiltrado = array.filter((item) => item.id !== products.id);
 
-  dispatch({
-    type: PRODUCT_DELETE,
-    payload: arrayFiltrado,
-  });
+  try {
+    const user = getState().usuario.user;
+    const array = getState().cart.array;
+    const arrayFiltrado = array.filter((item) => item.id !== products.id);
+    await db.collection(user.email).doc(products.id).delete();
+
+    dispatch({
+      type: PRODUCT_DELETE,
+      payload: arrayFiltrado,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const addToCart = (products) => (dispatch) => {
+export const addToCart = (products) => async (dispatch, getState) => {
   dispatch({
     type: LOADING_PRODUCT,
   });
@@ -58,20 +64,29 @@ export const addToCart = (products) => (dispatch) => {
       name: products.name,
       price: products.price,
       image: products.image,
-      id: shortid.generate()
+      id: shortid.generate(),
+    };
+
+    if (localStorage.getItem(product.id)) {
+      dispatch({
+        type: ADD_TO_CART,
+        payload: JSON.parse(localStorage.getItem(product.id)),
+      });
+      return;
     }
-    const productItem = db.collection('products').add(product)
-    console.log(productItem)
+
+    const user = getState().usuario.user;
+    const productItem = await db.collection(user.email).add(product);
+    console.log(productItem.id);
     dispatch({
       type: ADD_TO_CART,
-      payload: product
-    })
-    localStorage.setItem(product.id, JSON.stringify(product))
-
+      payload: product,
+    });
+    localStorage.setItem(product.id, JSON.stringify(product));
   } catch (error) {
     dispatch({
       type: LOADING_ERROR,
     });
-    console.log(error)
+    console.log(error);
   }
 };

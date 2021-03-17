@@ -15,7 +15,7 @@ const Navbar = (props) => {
   };
 
   const count = useSelector((store) => store.cart.array.length);
-  
+
   const activo = useSelector((store) => store.usuario.activo);
   const user = useSelector((store) => store.usuario.user);
 
@@ -33,12 +33,12 @@ const Navbar = (props) => {
       {activo ? (
         <div>
           <NavLink to="/cartShopping">
-            <p id="count" className="mt-3 text-danger">
-              {count >= 1 ? count : null}
+            <p id="count" className="mt-3">
+              <strong>{count >= 1 ? count : null}</strong>
             </p>
             <img
               id="imgCart"
-              src="https://imgur.com/w4yBTk5.jpg"
+              src="https://imgbox.es/images/2021/03/16/carrito20dbc749abd24d18.th.png"
               style={{ height: "60px" }}
               alt="cart"
             />
