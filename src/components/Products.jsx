@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Pagination from "rc-pagination";
 
 import { addToCart } from "../redux/ShoppingCartDucks";
 import { useDispatch } from "react-redux";
@@ -12,24 +13,19 @@ const Products = () => {
   const [hasMoreCount, setHasMoreCount] = useState();
   const [nameProduct, setNameProduct] = useState("");
 
-  const searchProduct = (nameProduct) => {
-    return function (product) {
-      return product.name.includes(nameProduct) || !nameProduct;
-    };
-  };
-
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `https://dev2.th3insid3.com/api/products?page=${currentPage}`
+        `https://dev2.th3insid3.com/api/products?page=${currentPage}&search=${nameProduct}`
       );
       const products = response.data.products;
+      console.log(response.data.paginatorInfo.count);
       setProducts(products);
       const hasMorePages = response.data.paginatorInfo.hasMorePages;
       setHasMoreCount(hasMorePages);
     }
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, nameProduct]);
 
   return (
     <div className="container text-center mt-4">
@@ -52,10 +48,18 @@ const Products = () => {
             }}
             className="btn btn-warning btn-sm mx-3"
           >
-            Sigiente
+            Siguiente
           </button>
         )}
       </div>
+      <Pagination
+        className="d-flex justify-content-around my-5 pagination"
+        showTotal={(total, range) =>
+          `${range[currentPage]} - ${range[1]} of ${total} pages`
+        }
+        current={currentPage}        
+        total={471}
+      />
       {products && (
         <div className="input-group d-flex justify-content-end">
           <div className="form-outline">
@@ -67,13 +71,10 @@ const Products = () => {
               placeholder="Buscar"
             />
           </div>
-          <button type="button" className="btn btn-success">
-            <i className="fas fa-search">Buscar</i>
-          </button>
         </div>
       )}
       <div className="row">
-        {products.filter(searchProduct(nameProduct)).map((products) => (
+        {products.map((products) => (
           <div
             key={products.id}
             className="col-md-6 col-lg-3 my-5"

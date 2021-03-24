@@ -55,7 +55,7 @@ export const deleteProduct = (products) => async (dispatch, getState) => {
   }
 };
 
-export const addToCart = (products) => async (dispatch, getState) => {
+export const addToCart = (products) => async (dispatch) => {
   dispatch({
     type: LOADING_PRODUCT,
   });

@@ -11,7 +11,7 @@ const Profile = () => {
           <img
             src={user.photoURL}
             style={{ borderRadius: "50%" }}
-            alt="photo Profile"
+            alt="photo_Profile"
           />
         </div>
         <div className="card-body">
